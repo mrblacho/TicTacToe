@@ -1,18 +1,20 @@
 #Python 3.9
 
-field = [['_','_','_'], ['_','_','_'], ['_','_','_']]
+field = [['_', '_', '_'], ['_', '_', '_'], ['_', '_', '_']]
 player1 = input('X - Hrac 1 napis svoje meno: ')
 player2 = input('O - Hrac 2 napis svoje meno: ')
 
 '''zapis suradnice ktore sa pouzili do listu, podla toho skontroluje ci uz niesu obsadene'''
 s_list = []
-round_num = 0   #cislovania kola
-end_game = False    #hra bezi kym sa tato hodnota nezmeni (kym nesplni podienku winner)
+round_num = 0   # cislovania kola
+end_game = False    # hra bezi kym sa tato hodnota nezmeni (kym nesplni podienku winner)
 
-def print_field():  #vytlac hracie pole
+
+def print_field():  # vytlac hracie pole
     print('  0 1 2')
     for i in range(len(field)):
         print(i, ' '.join(field[i]))
+
 
 def winner():
     global end_game
@@ -58,16 +60,17 @@ def winner():
         print('Remiza')
         end_game = True
 
+
 def player1_turn():
     print(f'Si na rade {player1}')
     try:
         x1 = int(input(f'{player1} zadaj suradnicu x '))
         y1 = int(input(f'{player1} zadaj suradnicu y '))
         p1_list = [x1, y1]
-        if x1 not in range(0,3):
+        if x1 not in range(0, 3):
             print('Zadal si zle suradnice, skus znova')
             player1_turn()
-        elif y1 not in range(0,3):
+        elif y1 not in range(0, 3):
             print('Zadal si zle suradnice, skus znova')
             player1_turn()
         elif p1_list in s_list:
@@ -76,9 +79,10 @@ def player1_turn():
         else:
             s_list.append(p1_list)
             field[y1][x1] = 'X'
-    except (ValueError):
+    except ValueError:
         print('nezadal si platne cislo, zadaj znova')
         return player1_turn()
+
 
 def player2_turn():
     print(f'Si na rade {player2}')
@@ -86,10 +90,10 @@ def player2_turn():
         x2 = int(input(f'{player2} zadaj suradnicu x '))
         y2 = int(input(f'{player2} zadaj suradnicu y '))
         p2_list = [x2, y2]
-        if x2 not in range(0,3):
+        if x2 not in range(0, 3):
             print('Zadal si zle suradnice, skus znova')
             player2_turn()
-        elif y2 not in range(0,3):
+        elif y2 not in range(0, 3):
             print('Zadal si zle suradnice, skus znova')
             player2_turn()
         elif p2_list in s_list:
@@ -101,6 +105,7 @@ def player2_turn():
     except ValueError:
         print('nezadal si platne cislo, zadaj znova')
         player2_turn()
+
 
 while end_game == False:
     print(f'Vitaj v kole {round_num}')
